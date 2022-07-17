@@ -1,16 +1,18 @@
 buttonColours= ["red", "blue", "green", "yellow"]
 var gamePattern = [];
-
+var userClickedPattern = [];
+//Use jQuery to detect when any of the buttons are clicked and trigger a handler function.
+$(".btn").click(function(){
+    var userChosenColour = $(this).attr("id");
+    userClickedPattern.push(userChosenColour);
+})
 function nextSequence(){
     var randomNumber = Math.floor(Math.random() * 4);
     var randomChosenColour = buttonColours[randomNumber];
     gamePattern.push(randomChosenColour);
 
-    //Use jQuery to select the button with the same id as the randomChosenColour
-    //Animate a flash to the button selected.
     $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
 
-    //use Javascript to play the sound for the button colour selected in step 1.
     var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
     audio.play();
 
